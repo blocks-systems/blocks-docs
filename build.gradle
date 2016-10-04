@@ -1,31 +1,23 @@
 buildscript {
-    ext {
-        grailsVersion = project.grailsVersion
-    }
     repositories {
         mavenLocal()
         maven { url "https://repo.grails.org/grails/core" }
     }
     dependencies {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
+        classpath "com.bertramlabs.plugins:asset-pipeline-gradle:2.8.2"
     }
 }
 
-version "0.3"
+version "0.3.1"
 group "blocks"
 
-apply plugin: 'maven'
-apply plugin: 'maven-publish'
 apply plugin:"eclipse"
 apply plugin:"idea"
 apply plugin:"org.grails.grails-plugin"
 apply plugin:"org.grails.grails-plugin-publish"
 apply plugin:"org.grails.grails-gsp"
-
-ext {
-    grailsVersion = project.grailsVersion
-    gradleWrapperVersion = project.gradleWrapperVersion
-}
+apply plugin:"asset-pipeline"
 
 repositories {
     mavenLocal()
@@ -45,11 +37,11 @@ dependencies {
     compile "org.grails:grails-core"
     compile "org.springframework.boot:spring-boot-starter-actuator"
     compile "org.springframework.boot:spring-boot-starter-tomcat"
-    compile "org.grails:grails-dependencies:$grailsVersion"
+    compile "org.grails:grails-dependencies"
     compile "org.grails:grails-web-boot"
     compile "org.grails.plugins:cache"
     compile "org.grails.plugins:scaffolding"
-    //business
+//business
     compile "commons-beanutils:commons-beanutils:1.8.3"
     compile "org.artofsolving.jodconverter:jodconverter-core:3.0.1"
     compile "fr.opensagres.xdocreport:fr.opensagres.xdocreport.document:1.0.4"
@@ -67,14 +59,12 @@ dependencies {
     profile "org.grails.profiles:web-plugin"
     provided "org.grails:grails-plugin-services"
     provided "org.grails:grails-plugin-domain-class"
+    provided "org.codehaus.groovy:groovy-ant"
+    runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.8.2"
     testCompile "org.grails:grails-plugin-testing"
     testCompile "org.grails.plugins:geb"
     testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = gradleWrapperVersion
 }
 grailsPublish {
     // TODO: Provide values here
@@ -89,4 +79,9 @@ grailsPublish {
     developers = [johndoe:"John Doe"]
     portalUser = ""
     portalPassword = ""    
+}
+
+
+assets {
+    packagePlugin = true
 }
