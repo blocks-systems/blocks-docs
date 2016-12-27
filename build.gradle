@@ -60,7 +60,7 @@ dependencies {
     provided "org.grails:grails-plugin-services"
     provided "org.grails:grails-plugin-domain-class"
     provided "org.codehaus.groovy:groovy-ant"
-    runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.11.1"
+    runtime "org.grails.plugins:asset-pipeline"
     testCompile "org.grails:grails-plugin-testing"
     testCompile "org.grails.plugins:geb"
     testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
